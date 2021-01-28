@@ -1,29 +1,29 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
-import TodoTextInput from '../../components/TodoTextInput'
+import TodoTextInput from '../../components/TodoTextInput/'
+import { addTodo } from '../../actions'
 
-const Header = (props) => (
+export const Header = ({ addTodo }) => (
 	<header className="header">
 		<h1>
 			Todo
 		</h1>
 		<TodoTextInput
 			newTodo
-			placeholder="Que faut-il faire ?"
-			onSave={
-				(text) => {
-					if (text.length !== 0) {
-						props.onAddTodo(text)
-					}
+			onSave={(text) => {
+				if (text.length !== 0) {
+					addTodo(text)
 				}
-			}
+			}}
+			placeholder="Que faut-il faire ?"
 		/>
 	</header>
 )
 
 Header.propTypes = {
-	onAddTodo: PropTypes.func.isRequired,
+	addTodo: PropTypes.func.isRequired,
 }
 
-export default Header
+export default connect(null, { addTodo })(Header)
