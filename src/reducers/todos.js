@@ -25,8 +25,11 @@ export default function todos (state = initialState, action) {
                     text: action.text,
                 },
             ]
+
         case DELETE_TODO:
             //...
+            break
+
         case EDIT_TODO:
             return state.map((todo) => {
                 return todo.id === action.id ? {
@@ -34,6 +37,7 @@ export default function todos (state = initialState, action) {
                     text: action.text,
                 } : todo
             })
+
         case COMPLETE_TODO:
             return state.map(
                 (todo) => {
@@ -43,17 +47,18 @@ export default function todos (state = initialState, action) {
                     }: todo
                 }
             )
+
         case COMPLETE_ALL_TODOS:
-            case COMPLETE_ALL_TODOS: {
-                const areAllMarked = state.every((todo) => todo.completed)
-            
-                return state.map((todo) => ({
-                    ...todo,
-                    completed: !areAllMarked,
-                }))
-            }
+            const areAllMarked = state.every((todo) => todo.completed)
+        
+            return state.map((todo) => ({
+                ...todo,
+                completed: !areAllMarked,
+            }))
+
         case CLEAR_COMPLETED:
             return state.filter((todo) => todo.completed === false)
+
         default:
             return state
     }
