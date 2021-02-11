@@ -27,7 +27,9 @@ export default function todos (state = initialState, action) {
             ]
 
         case DELETE_TODO:
-            //...
+            return state.filter((todo) => {
+                return todo.id !== action.id
+            })
             break
 
         case EDIT_TODO:
